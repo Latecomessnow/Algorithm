@@ -59,6 +59,30 @@ using namespace std;
 //     QuickSort(a, left + 1, end);
 // }
 
+int GetMidIndex(int* a, int left, int right)
+{
+    int mid = left + (right - left) / 2;
+    if (a[mid] > a[left])
+    {
+        if (a[mid] < a[right])
+            return mid;
+        else
+        {
+            if (a[right] > a[left])
+                return right;
+            else
+                return left;
+        }
+    }
+    else
+    {
+        if (a[left] < a[right])
+            return left;
+        else
+            return right;
+    }
+}
+
 // 3. 前后指针法
 void QuickSort(int* a, int begin, int end)
 {
@@ -67,6 +91,8 @@ void QuickSort(int* a, int begin, int end)
     int prev = begin;
     int cur = begin + 1;
     int keyi = begin;
+    int midIndex = GetMidIndex(a, begin, end);
+    swap(a[keyi], a[midIndex]);
     while (cur <= end)
     {
         // 若cur指向的内容小于key，则prev先向后移动一位，
@@ -139,11 +165,23 @@ int main()
         cout << arr[i] << " ";
     }
     cout << endl;
-    //QuickSort(arr, 0, sizeof(arr) / sizeof(int) - 1);
-    QuicKSortNonR(arr, 0, sizeof(arr) / sizeof(int) - 1);
+    QuickSort(arr, 0, sizeof(arr) / sizeof(int) - 1);
     for (int i = 0; i < 10; i++)
     {
         cout << arr[i] << " ";
+    }
+    cout << endl;
+    cout << endl;
+    int arr2[10] = {2, 3, 1, 4, 123, 13, 2, 6, 7, 12};
+    for (int i = 0; i < 10; i++)
+    {
+        cout << arr2[i] << " ";
+    }
+    cout << endl;
+    QuicKSortNonR(arr2, 0, sizeof(arr2) / sizeof(int) - 1);
+    for (int i = 0; i < 10; i++)
+    {
+        cout << arr2[i] << " ";
     }
     cout << endl;
     return 0;

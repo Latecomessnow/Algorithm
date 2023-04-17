@@ -9,4 +9,4 @@ myproc:Test.cc
 
 .PHONY:clean
 clean:
-	rm -f Test
+	rm -f myproc
