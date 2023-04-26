@@ -4,60 +4,60 @@
 using namespace std;
 
 // 1. Hoare法
-// void QuickSort(int* a, int begin, int end)
-// {
-//     // 区间只有一个数或者区间不存在不需要再递归了
-//     if (begin >= end)
-//         return;
-//     int left = begin, right = end;
-//     int keyi = left;
-//     while (left < right)
-//     {
-//         // 右边先走找小
-//         while (left < right && a[right] >= a[keyi])
-//         {
-//             right--;
-//         }
-//         // 左边再走找大
-//         while (left < right && a[left] <= a[keyi])
-//         {
-//             left++;
-//         }
-//         swap(a[left], a[right]);
-//     }
-//     swap(a[keyi], a[left]);
-//     keyi = left;
-//     QuickSort(a, begin, keyi - 1);
-//     QuickSort(a, keyi + 1, end);
-// }
+void QuickSort(int* a, int begin, int end)
+{
+    // 区间只有一个数或者区间不存在不需要再递归了
+    if (begin >= end)
+        return;
+    int left = begin, right = end;
+    int keyi = left;
+    while (left < right)
+    {
+        // 右边先走找小
+        while (left < right && a[right] >= a[keyi])
+        {
+            right--;
+        }
+        // 左边再走找大
+        while (left < right && a[left] <= a[keyi])
+        {
+            left++;
+        }
+        swap(a[left], a[right]);
+    }
+    swap(a[keyi], a[left]);
+    keyi = left;
+    QuickSort(a, begin, keyi - 1);
+    QuickSort(a, keyi + 1, end);
+}
 
 // 2. 挖坑法
-// void QuickSort(int* a, int begin, int end)
-// {
-//     if (begin >= end)
-//         return;
-//     int left = begin, right = end;
-//     // 左边第一个做坑位
-//     int key = a[left];
-//     while (left < right)
-//     {
-//         // 右边先走找小填坑位
-//         while (left < right && a[right] >= key)
-//         {
-//             right--;
-//         }
-//         a[left] = a[right];
-//         while (left < right && a[left] <= key)
-//         {
-//             left++;
-//         }
-//         a[right] = a[left];
-//     }
-//     // 把基准值填到最后的坑位中
-//     a[left] = key;
-//     QuickSort(a, begin, left - 1);
-//     QuickSort(a, left + 1, end);
-// }
+void QuickSort(int* a, int begin, int end)
+{
+    if (begin >= end)
+        return;
+    int left = begin, right = end;
+    // 左边第一个做坑位
+    int key = a[left];
+    while (left < right)
+    {
+        // 右边先走找小填坑位
+        while (left < right && a[right] >= key)
+        {
+            right--;
+        }
+        a[left] = a[right];
+        while (left < right && a[left] <= key)
+        {
+            left++;
+        }
+        a[right] = a[left];
+    }
+    // 把基准值填到最后的坑位中
+    a[left] = key;
+    QuickSort(a, begin, left - 1);
+    QuickSort(a, left + 1, end);
+}
 
 int GetMidIndex(int* a, int left, int right)
 {
