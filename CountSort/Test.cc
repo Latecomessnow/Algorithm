@@ -3,7 +3,40 @@
 
 using namespace std;
 
-void CountSort(int* a, int n)
+// void CountSort(int* a, int n)
+// {
+//     int min = a[0];
+//     int max = a[0];
+//     for (int i = 0; i < n; i++)
+//     {
+//         if (a[i] < min)
+//             min = a[i];
+//         if (a[i] > max)
+//             max = a[i];
+//     }
+//     int range = max - min + 1;
+//     int* count = (int*)malloc(sizeof(int) * range);
+//     if (count == nullptr)
+//     {
+//         printf("malloc fail\n");
+//         exit(-1);
+//     }
+//     // 统计数字出现的次数
+//     for (int i = 0; i < n; i++)
+//     {
+//         count[a[i] - min]++;
+//     }
+//     int j = 0;
+//     // 开始按次数进行排序
+//     for (int i = 0; i < range; i++)
+//     {
+//         while (count[i]--)
+//             a[j++] = i + min;
+//     }
+//     free(count);
+// }
+
+void CountSort(int *a, int n)
 {
     int min = a[0];
     int max = a[0];
@@ -15,23 +48,27 @@ void CountSort(int* a, int n)
             max = a[i];
     }
     int range = max - min + 1;
-    int* count = (int*)malloc(sizeof(int) * range);
+    int *count = (int *)malloc(sizeof(int) * range);
     if (count == nullptr)
     {
         printf("malloc fail\n");
         exit(-1);
     }
-    // 统计数字出现的次数
+    for (int i = 0; i < range; i++)
+    {
+        count[i] = 0;
+    }
     for (int i = 0; i < n; i++)
     {
         count[a[i] - min]++;
     }
     int j = 0;
-    // 开始按次数进行排序
     for (int i = 0; i < range; i++)
     {
         while (count[i]--)
+        {
             a[j++] = i + min;
+        }
     }
     free(count);
 }
